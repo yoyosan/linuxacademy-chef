@@ -1,0 +1,24 @@
+# vhost template file
+
+<% if @port == 80 -%> # supress the new line after the %>
+	NameVirtualHost *:80
+<% end -%>
+
+<VirtualHost *:<%= @port %> >
+
+	ServerName <%= @domain %>
+
+	DocumentRoot <%= @document_root %>
+
+	<Directory "/">
+	    AllowOverride None
+	    # Allow open access:
+	    Require all granted
+	</Directory>
+	
+	<Directory <%= @document_root %> >
+	    AllowOverride None
+	    # Allow open access:
+	    Require all granted
+	</Directory>
+</VirtualHost>
